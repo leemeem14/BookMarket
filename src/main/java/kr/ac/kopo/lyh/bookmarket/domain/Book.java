@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 public class Book {
     private String bookID; //도서번호
     private String name; //도서명
-    private BigDecimal unitprice; //단가
+    private BigDecimal unitPrice; //단가
     private String author; //작가
     private String description; //설명
     private String publisher; //출판사
