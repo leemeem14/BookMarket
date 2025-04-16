@@ -32,7 +32,7 @@ public class BookRepositoryImpl implements BookRepository {
         book2.setAuthor("고바야시 야스미");
         book2.setDescription("《이상한 나라의 앨리스》가 가진 환상성에 그로테스크한 묘사와 치밀한 논리가 더해진 본격 미스터리 화제작");
         book2.setPublisher("검은숲");
-        book2.setCategory("해외소설/일본");
+        book2.setCategory("일본소설");
         book2.setUnitsInStock(1000);
         book2.setReleaseDate("2015-12-21");
         book2.setCondition("신규도서");
@@ -44,7 +44,7 @@ public class BookRepositoryImpl implements BookRepository {
         book3.setDescription("베스트셀러 『앨리스 죽이기』의 후속작" +
                 "『도로시 죽이기』 한일 동시 출간!\n");
         book3.setPublisher("검은숲");
-        book3.setCategory("해외소설/일본");
+        book3.setCategory("일본소설");
         book3.setUnitsInStock(1000);
         book3.setReleaseDate("2018-05-18");
         book3.setCondition("신규도서");
@@ -61,15 +61,27 @@ public class BookRepositoryImpl implements BookRepository {
     public Book getBookById(String bookId) {
         Book bookInfo = null;
         for (Book book : listOfBooks) {
-            if (book != null && book.getBookID()!=null && book.getBookID().equals(bookId)) {
+            if (book!= null && book.getBookID()!=null && book.getBookID().equals(bookId)) {
                 bookInfo = book;
                 break;
             }
         }
 
-        if(bookInfo==null){
+        if(bookInfo == null){
             throw new IllegalArgumentException("도서번호가"+ bookId+"인 해당도서를 찾을수 없다.");
         }
         return bookInfo;
+    }
+
+    @Override
+    public List<Book> getBookByCategory(String category) {
+        List<Book> booksByCategory = new ArrayList<Book>();
+        for(int i =0; i<listOfBooks.size(); i++ ){
+            Book book = listOfBooks.get(i);
+            if(book.getCategory().equals(category)){
+                booksByCategory.add(book);
+            }
+        }
+        return booksByCategory;
     }
 }
