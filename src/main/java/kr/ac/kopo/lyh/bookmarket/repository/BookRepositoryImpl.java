@@ -110,6 +110,11 @@ public class BookRepositoryImpl implements BookRepository {
         //저장된 요소중에서 2 set(booksbycategory,booksbypublisher) 를 비교하여 같은 값만 남기고 제거하는 역할(교집합)
         booksByCategory.retainAll(booksByPublisher);
 
-        return Set.of();
+        return booksByCategory;
+    }
+
+    @Override
+    public void setNewBook(Book book) {
+        listOfBooks.add(book);
     }
 }
