@@ -69,22 +69,39 @@ public class BookController {
         return "addBook";
     }
 
-    @PostMapping("/add")
-    public String requestAddBook(@ModelAttribute Book book) {
-        MultipartFile bookImage = book.getBookImage();
-        String saveName = bookImage.getOriginalFilename();
-        File saveFile = new File(fileDir + saveName);
-        if(bookImage != null && !bookImage.isEmpty()){
-            try{
-                bookImage.transferTo(saveFile);
-            } catch(Exception e){
-                throw new RuntimeException("도서 이미지 업로드 실패함",e);
-            }
+//    @PostMapping("/add")
+//    public String requestAddBook(@ModelAttribute Book book) {
+//        MultipartFile bookImage = book.getBookImage();
+//        String saveName = bookImage.getOriginalFilename();
+//        File saveFile = new File(fileDir + saveName);
+//        if(bookImage != null && !bookImage.isEmpty()){
+//            try{
+//                bookImage.transferTo(saveFile);
+//            } catch(Exception e){
+//                throw new RuntimeException("도서 이미지 업로드 실패함",e);
+//            }
+//        }
+//        book.setFileName(saveName);
+//        bookService.setNewBook(book);
+//        return "redirect:/books";
+//    }
+@PostMapping("/add")
+public String requestSubmitNewBook(@ModelAttribute("book") Book book) {
+    MultipartFile bookImage = book.getBookImage();
+    String saveName = bookImage.getOriginalFilename();
+    File saveFile = new File(fileDir + saveName);
+    if(bookImage != null && !bookImage.isEmpty()) {
+        try {
+            bookImage.transferTo(saveFile);
+        } catch (IOException e) {
+            throw new RuntimeException("도서 이미지 업로드가 되지 않았습니다.");
         }
-        book.setFileName(saveName);
-        bookService.setNewBook(book);
-        return "redirect:/books";
     }
+    book.setFileName(saveName);
+
+    bookService.setNewBook(book);
+    return "redirect:/books";
+}
     @GetMapping("/download")
     public void downloadBookImage(@RequestParam("file")String paramKey, HttpServletResponse response) throws IOException {
         File imageFile = new File(fileDir + paramKey);
