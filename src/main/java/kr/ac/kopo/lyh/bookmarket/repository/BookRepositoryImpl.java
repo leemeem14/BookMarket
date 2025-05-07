@@ -23,6 +23,7 @@ public class BookRepositoryImpl implements BookRepository {
         book1.setUnitsInStock(1000);
         book1.setReleaseDate("2024-12-31");
         book1.setCondition("신규도서");
+        book1.setFileName("isbn0001");
 
         Book book2 = new Book();
         book2.setBookID("isbn0002");
@@ -35,6 +36,8 @@ public class BookRepositoryImpl implements BookRepository {
         book2.setUnitsInStock(1000);
         book2.setReleaseDate("2015-12-21");
         book2.setCondition("신규도서");
+        book2.setFileName("isbn0002");
+
         Book book3 = new Book();
         book3.setBookID("isbn0003");
         book3.setName("도로시 죽이기");
@@ -47,6 +50,7 @@ public class BookRepositoryImpl implements BookRepository {
         book3.setUnitsInStock(1000);
         book3.setReleaseDate("2018-05-18");
         book3.setCondition("신규도서");
+        book3.setFileName("isbn0003");
 
         listOfBooks.add(book1);
         listOfBooks.add(book2);

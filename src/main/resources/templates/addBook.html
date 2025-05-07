@@ -32,13 +32,13 @@
                 <span class="fs-4">&nbsp;&nbsp;BookMarket</span>
             </a>
         </header>
-        <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+        <div class="p-5 mb-4 bg-body-tertiary rounded-3" >
             <div class="container-fluid py-5">
                 <h1 class="display-5 fw-bold">도서상세정보</h1>
                 <p class="col-md-8 fs-4">BookMarket</p>
             </div>
         </div>
-            <form action="/BookMarket/books/add" method="post">
+            <form action="/BookMarket/books/add" method="post" enctype="multipart/form-data">
                 <legend th:text="${addTitle}"></legend>
                 <div class="mp-3 row">
                     <label class="col-sm-2 control-label">도서 아이디</label>
@@ -101,6 +101,12 @@
                         <input type="radio" name="condition" value="old"/>old
                         <input type="radio" name="condition" value="E-book"/>E-book
                     </div>
+                </div>
+                <div class="mp-3 row">
+                    <label class="col-sm-2 control-label">도서이미지</label>
+                    <div class="col-sm-7">
+                        <input type="file" name="bookImage" class="form-control"/>
+                </div>
                 </div>
                 <div class="mp-3 row">
                     <div class="col-sm-offset-2 col-sm-10">
