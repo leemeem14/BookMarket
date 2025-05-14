@@ -1,11 +1,11 @@
 package kr.ac.kopo.lyh.bookmarket.domain;
 
+import jakarta.validation.constraints.*;
 import org.springframework.web.multipart.MultipartFile;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.math.BigDecimal;
 
 
@@ -14,8 +14,13 @@ import java.math.BigDecimal;
 //@Setter
 //@NoArgsConstructor
 public class Book {
+    @Pattern(regexp = "isbn[0-9]+")
     private String bookID; //도서번호
+    @Size(min = 4, max = 50)
     private String name; //도서명
+    @Min(value=0)
+    @Digits(integer=8, fraction=2)
+    @NotNull
     private BigDecimal unitPrice; //단가
     private String author; //작가
     private String description; //설명
