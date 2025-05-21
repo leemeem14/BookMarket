@@ -4,6 +4,8 @@ import jakarta.validation.Valid;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.ac.kopo.lyh.bookmarket.domain.Book;
 import kr.ac.kopo.lyh.bookmarket.service.BookService;
+import kr.ac.kopo.lyh.bookmarket.validator.BookValidator;
+import kr.ac.kopo.lyh.bookmarket.validator.UnitsInStockValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +35,11 @@ public class BookController {
     @Value("${file.uploadDir}")
     String fileDir;
 
+//    @Autowired
+//    private UnitsInStockValidator unitsInStockValidator;
+    @Autowired
+    private BookValidator bookValidator;
+
 
     @GetMapping
     public String requestBookList(Model model) {
@@ -50,8 +57,8 @@ public class BookController {
         return modelV ;
     }
     @GetMapping("/book")
-    public String requestBookById(@RequestParam("id") String bookId, Model model) {
-        Book book = bookService.getBookById(bookId);
+    public String requestBookById(@RequestParam("id") String bookID, Model model) {
+        Book book = bookService.getBookByID(bookID);
         model.addAttribute("book", book);
         return "Book";
     }
@@ -129,6 +136,8 @@ public String requestSubmitNewBook(@Valid @ModelAttribute("book") Book book, Bin
     }
     @InitBinder
     public void initBinder(WebDataBinder binder){
+//        binder.addValidators(unitsInStockValidator);
+        binder.addValidators(bookValidator);
         binder.setAllowedFields("bookId", "name","unitPrice", "author", "description", "publisher", "category", "unitsInStock","releaseDate","condition","bookImage");
     }
 }

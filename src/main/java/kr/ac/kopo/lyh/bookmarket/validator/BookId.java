@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 
 public @interface BookId {
-    String message() default "";
+    String message() default "{BookId.book.bookId}";
     Class<?>[] groups() default {};
     Class<?>[] payload() default {};
 }
