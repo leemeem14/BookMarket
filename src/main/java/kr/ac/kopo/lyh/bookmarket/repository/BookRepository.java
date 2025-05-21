@@ -11,7 +11,7 @@ import java.util.Set;
 
 public interface BookRepository {
     List<Book> getAllBookList();
-    Book getBookById(String bookId);
+    Book getBookByID(String bookID);
     List<Book> getBookByCategory(String category);
     Set<Book> getBookListByFilter(Map<String, List<String>> filter);
     void setNewBook(Book book);

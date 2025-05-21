@@ -50,9 +50,9 @@ public class BookController {
         return modelV ;
     }
     @GetMapping("/book")
-    public String requestBookById(@RequestParam("id")String bookId, Model model) {
-        Book bookById = bookService.getBookById(bookId);
-        model.addAttribute("book", bookById);
+    public String requestBookById(@RequestParam("id") String bookId, Model model) {
+        Book book = bookService.getBookById(bookId);
+        model.addAttribute("book", book);
         return "Book";
     }
     @GetMapping("/{category}")
@@ -97,6 +97,8 @@ public String requestSubmitNewBook(@Valid @ModelAttribute("book") Book book, Bin
     MultipartFile bookImage = book.getBookImage();
     String saveName = bookImage.getOriginalFilename();
     File saveFile = new File(fileDir + saveName);
+    System.out.println(fileDir + saveName);
+
     if(bookImage != null && !bookImage.isEmpty()) {
         try {
             bookImage.transferTo(saveFile);

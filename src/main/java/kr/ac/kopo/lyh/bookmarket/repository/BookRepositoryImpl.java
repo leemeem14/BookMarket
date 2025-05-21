@@ -23,7 +23,7 @@ public class BookRepositoryImpl implements BookRepository {
         book1.setUnitsInStock(1000);
         book1.setReleaseDate("2024-12-31");
         book1.setCondition("신규도서");
-        book1.setFileName("isbn0001");
+        book1.setFileName("isbn0001.jpg");
 
         Book book2 = new Book();
         book2.setBookID("isbn0002");
@@ -36,7 +36,7 @@ public class BookRepositoryImpl implements BookRepository {
         book2.setUnitsInStock(1000);
         book2.setReleaseDate("2015-12-21");
         book2.setCondition("신규도서");
-        book2.setFileName("isbn0002");
+        book2.setFileName("isbn0002.jpg");
 
         Book book3 = new Book();
         book3.setBookID("isbn0003");
@@ -50,7 +50,7 @@ public class BookRepositoryImpl implements BookRepository {
         book3.setUnitsInStock(1000);
         book3.setReleaseDate("2018-05-18");
         book3.setCondition("신규도서");
-        book3.setFileName("isbn0003");
+        book3.setFileName("isbn0003.jpg");
 
         listOfBooks.add(book1);
         listOfBooks.add(book2);
@@ -61,18 +61,19 @@ public class BookRepositoryImpl implements BookRepository {
     public List<Book> getAllBookList() {return listOfBooks;}
 
     @Override
-    public Book getBookById(String bookId) {
+    public Book getBookByID(String bookID) {
         Book bookInfo = null;
         for (Book book : listOfBooks) {
-            if (book!= null && book.getBookID()!=null && book.getBookID().equals(bookId)) {
+            if (book != null && book.getBookID()!=null && book.getBookID().equals(bookID)) {
                 bookInfo = book;
                 break;
             }
         }
 
-        if(bookInfo == null){
-            throw new IllegalArgumentException("도서번호가"+ bookId+"인 해당도서를 찾을수 없다.");
+        if(bookInfo==null){
+            throw new IllegalArgumentException("도서번호가 "+ bookID +"인 해당 도서를 찾을 수 없습니다.");
         }
+
         return bookInfo;
     }
 
